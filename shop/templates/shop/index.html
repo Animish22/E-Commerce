@@ -1,0 +1,294 @@
+{% extends 'shop/basic.html' %}
+{%block title%}Home{% endblock %}
+{% block homeactive %}active{% endblock homeactive %}
+{% block css %}
+<style>
+    .col-md-3 {
+        display: inline-block;
+        margin-left: -4px;
+    }
+    .carousel-indicators .active {
+        background-color: blue;
+    }
+
+    .col-md-3 img {
+        width: 170px;
+        height: 200px;
+    }
+    .img-container
+    {
+        height:80px;
+        width:65%;
+    }
+    body .carousel-indicator li {
+        background-color: blue;
+    }
+
+    body .carousel-indicators {
+        bottom: 0;
+    }
+
+    body .carousel-control-prev-icon,
+    body .carousel-control-next-icon {
+        background-color: blue;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        top: auto;
+        bottom: auto;
+        padding-top: 171px;
+    }
+
+    body .no-padding {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    #index-img-area {
+        background-color: rgb(255, 233, 192);
+        z-index: -1;
+    }
+
+    #sale-img {
+        width: 100%;
+    }
+
+    footer {
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 5px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+        background-image: linear-gradient(grey , black);
+        color: white;
+    }
+
+    #Product-Area{
+        background-image: linear-gradient(rgb(230, 218, 218), rgb(105, 100, 100));
+    }
+    .product-row
+    {
+        width:90vw;
+    }    
+    @media screen and (max-width:576px) {
+        .card-title
+        {
+            font-size: 0.6rem;
+        }
+        .product-row
+        {
+            width: 80vw;
+            font-size: 0.5rem;
+        }
+        .col-sm-3
+        {
+            width: 25%;
+        }
+        .btn-primary
+        {
+            width:  100%;
+            font-size: 0.3rem;
+            padding: 3px;
+        }
+        .title-card
+        {
+            font-size: 0.5rem;
+        }
+
+        .price-card
+        {
+            font-size: 0.5rem;
+        }
+        .text-card
+        {
+            font-size: 0.5rem;
+        }
+        .carousel-control-prev,
+        .carousel-control-next
+        {
+            padding-top: 98px;
+        }
+    }
+</style>
+{% endblock %}
+{% block body %}
+{% load static %}
+<div id="index-img-area" class="d-flex justify-content-center">
+    <img id="sale-img" src="../../static/shop/Sale_index.jpg" alt="Summer Sale">
+</div>
+<div class="container-fluid" id="Product-Area">
+    <div class="container d-flex flex-column justify-content-center align-items-center" >
+        <!--Slideshow starts here -->
+        {% for product, range, nSlides in allProds %}
+        <!-- we use product.0.category_name because each product category will have atleast one item and for that item we can get category_name .We cannot use 1,2, etc because not guaranteed that each category will have more than 1 items . product.0.category_name means the value of category_name for the first product in the ith iterations of allprods i.e. product.0.category_name is unique . -->
+        <h5 class="my-4">Flash Sale On - {{product.0.category_name}} - Recommended Items</h5>
+        <div class="row product-row">
+            <div id="demo{{forloop.counter}}" class="col carousel slide my-3" data-ride="carousel">
+                <ul class="carousel-indicators">
+                    <li data-target="#demo{{forloop.counter}}" data-slide-to="0" class="active"></li>
+                    {% for i in range %}
+                    <li data-target="#demo{{forloop.parentloop.counter}}" data-slide-to="{{i}}"></li>
+                    {% endfor %}
+                </ul>
+                <div class="container carousel-inner no-padding">
+                    <div class="carousel-item active bg-light data-container">
+                        {% for i in product %}
+                        <div class="col-xs-3 col-sm-3 col-md-3">
+                            <div class="card align-items-center card-container" style="width: 100%;">
+                                <div class="img-container d-flex justify-content-center">
+                                <img src='/media/{{i.images}}' class="card-img-top img-container" alt="..." style="width:90%; height:100%; ">
+                                </div>
+                                <div class="card-text-container" style="width:100%">
+                                <div class="card-body" style="width:100%">
+                                    <h5 class="card-title title-card"  id="namepr{{i.id}}">{{i.product_name|slice:"0:10"}}..</h5>
+                                    <h7 class="card-title price-card" id="price" style="display:block;">Price : <span
+                                            id="pricepr{{i.id}}">{{i.price}}</span></h7>
+                                    {% comment %} <p class="card-text text-card">{{i.desc|slice:"0:10"}}...</p> {% endcomment %}
+                                    <span id="divpr{{i.id}}" class="divpr">
+                                        <button id="pr{{i.id}}" class="btn btn-primary cart my-2">Add</button>
+                                    </span>
+                                    <a href="/shop/productview/{{i.id}}"><button id="qv{{i.id}}"
+                                            class="btn btn-primary cart my-2">View</button></a>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
+                        <!-- If above condn in true this statement is executed . What it does is it closes the current div and since its not the last item therefore it opens another div  of carousel item -->
+                        </div>
+                        <div class="carousel-item">
+                        {% endif %}
+
+                        {% endfor %}
+                        <!-- Once the entire for loop has ended that means all slides and products over then we just close the final div without opeing a new div. -->
+                    </div>
+                </div>
+            </div>
+            <!-- left and right controls for the slide -->
+            <a class="carousel-control-prev" href="#demo{{forloop.counter}}" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#demo{{forloop.counter}}" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    <footer>&copy; 2023 AniCart All Rights Reserved </footer>
+</div>
+    {% endblock %}
+    {% block js %}
+    <script>
+
+
+        // Find out the cart items from localStorage
+        // Always checks if cart is an item present in localstorage if not it creates one . And if present then it converts the cart data into a JSON object using parse.
+        if (localStorage.getItem('cart') == null) {
+            var cart = {};
+        } else {
+            cart = JSON.parse(localStorage.getItem('cart'));
+            // document.getElementById('cart').innerHTML = Object.keys(cart).length;
+            updateCart(cart);
+        }
+
+        // If the add to cart button is clicked, add/increment the item
+        // $('.cart').click(function() {
+        //     $('.divpr').on('click','button.cart' ,function(){
+        //     var idstr = this.id.toString();
+        //     if (cart[idstr] != undefined) {
+        //         cart[idstr] = cart[idstr] + 1;
+        //     } else {
+        //         cart[idstr] = 1;
+        //     }
+        //     updateCart(cart);
+
+        // });
+
+
+        //Used to fill items in cart so that we can access them using the above parse function  .Also the items are added such that they are a valid json string.
+        $('.divpr').on('click', 'button.cart', function () {
+            // this.id.toString() Used to get string of id of the class cart on which we have clicked
+            var idstr = this.id.toString();
+            if (cart[idstr] != undefined) {
+                qty = cart[idstr][0] + 1;
+            } else {
+                qty = 1;
+                // We write name + idstr because idstr is the id of cart which is pr{{i.id}} and the id for span whose value we have to change is namepr{{i.id}}
+                name = document.getElementById('name' + idstr).innerHTML;
+                price = document.getElementById('price' + idstr).innerHTML;
+                cart[idstr] = [qty, name, price];
+            }
+            updateCart(cart);
+
+        });
+        //Updating Cart
+
+        function updateCart(cart) {
+            var sum = 0;
+            for (var item in cart) {
+                // item has the value pr{{i.id}}
+                // by adding div to item we get the class of Add to cart button i.e divpr{{i.id}} 
+                sum = sum + cart[item][0];
+                document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item][0] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            document.getElementById('cart').innerHTML = sum;
+            updatePopover(cart);
+            console.log(cart);
+        }
+        // If plus or minus button is clicked, change the cart as well as the display value
+        // The pr{{i.id}} id is of the add to cart button 
+        // The divpr{{i.id}} id is of the span in which dd to cart is present  
+        $('.divpr').on("click", "button.minus", function () {
+            a = this.id.slice(7,);
+            //slicing is done here to remove minuspr from id name to get only the number present in id then later pr is added in order to access the cart element can also be done by slicing till 5 i.e. removing only minus and then directly placing a 
+            cart['pr' + a][0] = cart['pr' + a][0] - 1;
+            cart['pr' + a][0] = Math.max(0, cart['pr' + a][0]);
+            // Done so that by decreasing the quantity does not go in minus.
+            document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
+            updateCart(cart);
+        });
+
+
+        $('.divpr').on("click", "button.plus", function () {
+            a = this.id.slice(6,);
+            cart['pr' + a][0] = cart['pr' + a][0] + 1;
+            document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
+            updateCart(cart);
+        });
+
+        //Add Popover to cart
+        $('#popcart').popover();
+        updatePopover(cart);
+        function updatePopover(cart) {
+            console.log('We are inside updatePopover');
+            var popStr = "";
+            popStr = popStr + "<h5> Cart for your items in my shopping cart </h5><div class='mx-2 my-2'>";
+            var i = 1;
+            for (var item in cart) {
+                popStr = popStr + "<b>" + i + "</b>. ";
+                // item represents pr{{i.id}} by addind name to it we  get the id of product name i.e. namepr{{i.id}} which shows the name inside the cart popover
+                popStr = popStr + document.getElementById('name' + item).innerHTML.slice(0, 19) + "... Qty: " + cart[item][0] + '<br>';
+                i = i + 1;
+            }
+            popStr = popStr + "</div> <a href='/shop/checkout'><button class='btn btn-primary' id ='checkout'>Checkout</button></a> <button class='btn btn-primary' onclick='clearCart()' id ='clearCart'>Clear Cart</button>     "
+            // console.log(popStr);
+            document.getElementById('popcart').setAttribute('data-content', popStr);
+            $('#popcart').popover();
+        }
+        function clearCart() {
+            cart = JSON.parse(localStorage.getItem('cart'));
+            for (var item in cart) {
+                document.getElementById('div' + item).innerHTML = '<button id="' + item + '" class="btn btn-primary cart">Add To Cart</button>'
+            }
+            localStorage.clear();
+            cart = {};
+            updateCart(cart);
+        }
+    </script>
+    {% endblock %}

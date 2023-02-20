@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <title>{% block title %} {% endblock %}</title>
+  <style>
+    #nav-logo
+    {
+      height:45px;
+      width:55px;
+      border : 1px solid white;
+      border-radius : 50%;
+    }
+    @media screen and (300px < width < 500px) {
+      .nav-link
+      {
+        font-size:0.6rem;
+      }
+      #search
+      {
+        margin: 2px;
+        height:32px;
+        width:50%;
+        font-size: 0.7rem;
+      }
+      .card-item-name
+      {
+        font-size: 0.3rem;
+      }
+      .Signup-text
+      {
+        font-size:0.5rem;
+      }
+      .btn-success , #popcart , .btn-outline-success
+      {
+        padding:3px;
+        font-size:0.7rem;
+      }
+    }
+  </style>
+  {% block css %} {% endblock %}
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/shop" id="brand"><img src="../../static/shop/Logo.png" alt="Logo" id="nav-logo"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item ">
+            <a class="nav-link {% block homeactive %}{% endblock homeactive %}" href="/shop">Home </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% block aboutactive %}{% endblock aboutactive %}" href="/shop/about">About Us</a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link {% block trackeractive %}{% endblock trackeractive %}" href="/shop/tracker">Tracker</a>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link {% block contactactive %}{% endblock contactactive %}" href="/shop/contact">Contact
+              Us</a>
+          </li>
+        </ul>
+        <form method="get" action="/shop/search/" class="d-flex me-2" role="search" style="margin: 6px 2px;">
+          <input class="form-control me-2" name="search" id="search" type="search" placeholder="Search"
+            aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <button type="button" class="btn btn-secondary mx-2 {% block  nothomecart %}{% endblock nothomecart%} " id="popcart" data-container="body" data-toggle="popover"
+        data-placement="bottom" data-html="true" data-content="Vivamus
+sagittis lacus vel augue laoreet rutrum faucibus.">
+        Cart(<span id="cart">0</span>)
+      </button>
+        {% if user.is_authenticated %}
+        <button class="btn btn-success mx-2"><a class="nav-link" href="/shop/logout/">Logout</a></button>
+        {% else %}
+        <!-- Signup Button trigger modal -->
+        <button type="button" class="btn btn-success mx-2" data-bs-toggle="modal" data-bs-target="#signup">
+          Signup
+        </button>
+
+        <!-- Signup Modal -->
+        <div class="modal fade" id="signup" tabindex="-1" aria-labelledby="signupLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="signupLabel">Signup</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form method="post" action="/shop/signup/"> {% csrf_token %}
+                  <div class="mb-3">
+                    <label for="Signupusername" class="form-label">UserName</label>
+                    <input type="text" class="form-control" id="Signupusername" name="Signupusername">
+                  </div>
+                  <div class="mb-3">
+                    <label for="Email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email">
+                  </div>
+                  <div class="mb-3">
+                    <label for="fname" class="form-label">UserName</label>
+                    <input type="text" class="form-control" id="fname" name="fname">
+                  </div>
+                  <div class="mb-3">
+                    <label for="Signupusername" class="form-label">UserName</label>
+                    <input type="text" class="form-control" id="lname" name="lname">
+                  </div>
+                  <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="pass1" name="pass1">
+                  </div>
+                  <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="pass2" name="pass2">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Signup</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Login Button trigger modal -->
+        <button type="button" class="btn btn-success mx-2" data-bs-toggle="modal" data-bs-target="#login">
+          Login
+        </button>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+  {% for message in messages %}
+  <div class="alert alert-{{message.tags}} alert-dismissible" role="alert">
+    <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+        aria-hidden="true">&times;</span></span>
+    <strong>Message :</strong> {{message}}
+  </div>
+  {% endfor %}
+  {% block body %} {% endblock %}
+  <!-- Login Modal -->
+  <div class="modal fade" id="login" tabindex="-1" aria-labelledby="loginLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="loginLabel">Login</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="post" action="/shop/login/"> {% csrf_token %}
+            <div class="mb-3">
+              <label for="username" class="form-label">UserName</label>
+              <input type="text" class="form-control" id="username" name="username" aria-describedby="user">
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" name="password">
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  {% block js %} {% endblock %}
+</body>
+
+</html>

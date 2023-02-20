@@ -1,0 +1,118 @@
+{% extends 'shop/basic.html' %}
+{% block title %} About Us{% endblock %}
+{% block aboutactive %}active{% endblock aboutactive %}
+{% block body %}
+{% block css %}
+<style>
+  body
+  {
+    box-sizing : border-box;
+  }
+  #News
+  {
+    height:38px;
+  }
+  #about-center-img
+  {
+    height:50vh;
+    width:50vw;
+  }
+  #Stories
+  {
+    height:38px;
+  }
+  #caption
+  {
+    font-size: 1rem;
+    font-style: italic;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  #logo-container
+  {
+    position: relative;
+  }
+  #logo
+  {
+    height:80px;
+    width: 80px;
+    position: absolute;
+    left:100%;
+    border: 2px solid black;
+    border-radius: 50%;
+  }
+</style>
+{% endblock css %}
+<main role="main">
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron bg-light border-bottom">
+    <div class="container d-flex" id="logo-container">
+
+      <h1 class="display-3" style="font-style: italic;">AniCart <span id="caption">Serving since 2000</span></h1>
+      <a href="/shop/"><img src="../../static/shop/Logo.png" alt="Logo" id="logo"></a>
+    </div>
+  </div>
+<div class="d-flex justify-content-center bg-light p-1">
+  <div class="col-3 bg-light d-flex flex-column border-end me-3">
+    <div class="row border border-top-0 border-start-0 border-end-0 d-flex justify-content-start p-3" id="News">News</div>
+    <div class="row border border-top-0 border-start-0 border-end-0 d-flex justify-content-center p-3">AWS CEO Adam Selipsky sends note to employees reflecting on 2022</div>
+    <div class="row border border-top-0 border-start-0 border-end-0 d-flex justify-content-center p-3">AWS CEO Adam Selipsky sends note to employees reflecting on 2022</div>
+    <div class="row border border-top-0 border-start-0 border-end-0 d-flex justify-content-center p-3">AWS CEO Adam Selipsky sends note to employees reflecting on 2022</div>
+    <div class="row border border-top-0 border-start-0 border-end-0 d-flex justify-content-center p-3">AWS CEO Adam Selipsky sends note to employees reflecting on 2022</div>
+    <div class="row border border-top-0 border-start-0 border-end-0 d-flex justify-content-center p-3">AWS CEO Adam Selipsky sends note to employees reflecting on 2022</div>
+    <div class="row border border-top-0 border-start-0 border-end-0 d-flex justify-content-center p-1" style="height:33px;">More</div>
+  </div>
+  <div class="col-6 d-flex flex-column align-items-space-between">
+    <div class="row d-flex justify-content-center p-0 mx-1"><img src="../../static/shop/about-img.jpg" alt="Img" id="about-center-img"></div>
+    <div class="row border border-top-0 border-start-0 border-end-0 d-flex justify-content-center p-2">
+      <h4>Everything you need to know about our site</h4>
+      <p>Prime Video is home to more content than you might realize. If you're ready to stream blockbuster movies, hit shows, award-winning Amazon Originals, premium channels, and sports, read on for everything you need to know about Prime Video.</p>
+    </div>
+  </div>
+  <div class="col-2 d-flex flex-column align-items-space-between border-start">
+    <div class="row border border-top-0 border-start-0 border-end-0 d-flex justify-content-start p-2 ms-1" id="Stories">
+       Success Stories
+    </div>
+    <div class="row border-bottom d-flex justify-content-center p-2 ms-1">5 tips for talking to your teen about their tech habits</div>
+    <div class="row border border-top-0 border-start-0 border-end-0 d-flex justify-content-center p-2 ms-1">5 tips for talking to your teen about their tech habits</div>
+    <div class="row border border-top-0 border-start-0 border-end-0 d-flex justify-content-center p-2 ms-1">5 tips for talking to your teen about their tech habits</div>
+    <div class="row border border-top-0 border-start-0 border-end-0 d-flex justify-content-center p-2 ms-1">5 tips for talking to your teen about their tech habits</div>
+    <div class="row border border-top-0 border-start-0 border-end-0 d-flex justify-content-center p-2 ms-1">5 tips for talking to your teen about their tech habits</div>
+    <div class="row border border-top-0 border-start-0 border-end-0 d-flex justify-content-center p-2 ms-1">5 tips for talking to your teen about their tech habits</div>
+
+  </div>
+</div>
+  <div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+      <div class="col-md-4">
+        <h2>Heading</h2>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+      </div>
+      <div class="col-md-4">
+        <h2>Heading</h2>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+      </div>
+      <div class="col-md-4">
+        <h2>Heading</h2>
+        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+      </div>
+    </div>
+
+    <hr>
+    <p><a class="btn btn-primary btn-lg" href="/shop/" role="button">Go to Shop &raquo;</a></p>
+  </div> <!-- /container -->
+
+</main>
+<footer class="container">
+  <p>&copy; Company 2000-2023</p>
+</footer>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="/docs/4.5/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="/docs/4.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous"></script></body>
+</html>
+
+
+{% endblock %}

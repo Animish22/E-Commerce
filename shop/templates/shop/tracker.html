@@ -1,0 +1,214 @@
+{% extends 'shop/basic.html' %}
+{% block title%} Anicart Tracker : Track Your Orders{% endblock %}
+{% block nothomecart %}see{% endblock nothomecart %}
+{% block trackeractive %}active{% endblock trackeractive %}
+{% block css %}
+<style>
+    .NotLoggedIn {
+        font-family: 'Courier New', Courier, monospace;
+        font-style: italic;
+    }
+    .see
+      {
+          visibility : hidden ;
+      }
+
+    body {
+        background-color: lightblue;
+        z-index: -1;
+    }
+    #line
+    {
+        height: 35px;
+        width: auto;
+        position: relative;
+        right: 12px;
+        background-color: rgb(229 212 212);
+    }
+    #Form-area
+    {
+        background-color: white;
+    }
+    #circle1
+    {
+        background-color: red;
+        z-index: 2;
+        height: 10px;
+        width: 10px;
+        border: 1px solid red;
+        border-radius: 50%;
+    }
+    #circle2
+    {
+        background-color: orange;
+        z-index: 2;
+        height: 10px;
+        width: 10px;
+        border: 1px solid orange;
+        border-radius: 50%;
+    }
+    #circle3
+    {
+        background-color: green;
+        z-index: 2;
+        height: 10px;
+        width: 10px;
+        border: 1px solid green;
+        border-radius: 50%;
+    }
+</style>
+{% endblock css %}
+{% block body %}
+{% load humanize %}
+{% if user.is_authenticated %}
+<div class="container d-flex ">
+    <div class="row d-flex align-items-center">
+        <div class="col-4 my-4">
+            <div class="container">
+                <h2>Order Status</h2>
+                <h5>Enter your Order Id and Email address to track your order</h5>
+            </div>
+            
+        </div>
+        <div class="col-8 my-4 rounded-2" id="Form-area">
+            <div id="line" class="d-flex align-items-center rounded-1">
+                <div class=" ms-3 mx-1" id="circle1"></div>
+                <div class="mx-1" id="circle2"></div>
+                <div class="mx-1" id="circle3"></div>
+            </div>
+            <div class="container p-2">
+                <h4>Thank you for Placing your order with Us</h4>
+                <div class="container">
+                    <h6>Please enter your details below to track your order.</h6>
+                </div>
+                <form method="post" action="#" id="trackerForm">{% csrf_token %}
+                    <div class="form-row border-secondary border-1 border p-2 rounded-2">
+                        <div class="form-group col-md-6 my-2">
+                            <label for="inputname" style="font-family: 'Roboto Mono', monospace;">Order Id</label>
+                            <input type="text" class="form-control" id="orderId" name="orderId" placeholder="Enter your Order Id here">
+                        </div>
+                        <div class="form-group col-md-6 my-2">
+                            <label for="inputEmail4" style="font-family: 'Roboto Mono', monospace;">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your Email here">
+                        </div>
+                        <button type="submit" class="btn btn-primary my-2">Track Order</button>
+                    </div>
+                </form>
+                <div class="col my-4 ">
+                    <div class="my-4">
+                        <ul class="list-group" id="items">
+
+                        </ul>
+                    </div>
+                    <div class="my-4">
+                        <ul class="list-group" id="citems">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="NotLoggedIn">
+    Please Login to track your orders
+</div>
+{% endif %}
+{% endblock %}
+{% block js %}
+<script>  
+    $('#trackerForm').submit(function (event) {
+        $('#items').empty();
+        $('#citems').empty();
+        var formData = {
+            'orderId': $('input[name=orderId]').val(),
+            'email': $('input[name=email]').val(),
+            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+        };
+        $.ajax({
+            type: 'POST',
+            url: '/shop/tracker/',
+            data: formData,
+            encode: true
+        })
+            .done(function (data) {
+                console.log(data);
+                data = JSON.parse(data);
+                updates = data[0];
+                if (updates == undefined) {
+                    updates = ""
+                }
+                console.log(updates);
+                if (updates.length > 0 & updates != {}) {
+                    mystr = `<h2> Your Order Status </h2>`
+                    $('#items').append(mystr);
+                    for (i = 0; i < updates.length; i++) {
+                        let text = updates[i]['text']; 
+                        let time = updates[i]['time'];
+                        var a = new Date(time);
+                        var curr = new Date();
+                        mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                    ${text}
+                    <span class="badge text-bg-dark">${time}</span>
+                </li>`
+                        $('#items').append(mystr);
+                        console.log(Math.abs(curr - a))
+                        if(Math.abs(curr - a) >= 46000000)
+                        {
+                            mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Your Order has been Shipped from our Store in Mumbai.</li>`
+                            $('#items').append(mystr);
+                        }
+                        if(Math.abs(curr - a) >= 51000000)
+                        {
+                            mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Your Order has reached Your city Delhi</li>`
+                            $('#items').append(mystr);
+                        }
+                        if(Math.abs(curr - a) >= 51500000)
+                        {
+                            mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Your Order has is been rechecked for any damage .</li>`
+                            $('#items').append(mystr);
+                        }
+                        if(Math.abs(curr - a) >= 52000000)
+                        {
+                            mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Your Order has been delivered to you , Thanks for using our site.</li>`
+                            $('#items').append(mystr);
+                        }
+                        
+                    }
+                } else {
+                    mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                    Sorry, We are not able to fetch this order id and email. Make sure to type correct order Id and email</li>`
+                    $('#items').append(mystr);
+                }
+                cart = JSON.parse(data[1]);
+                console.log(cart);
+                var sum = 0;
+                if (cart !=undefined)
+                {
+                    mystr = `<h2> Your Order Items </h2>`
+                    $('#citems').append(mystr);
+                }
+                for (item in cart) {
+                    
+                    let name = cart[item][1];
+                    let qty = cart[item][0];
+                    sum = sum + qty;
+                    // The ${name} and ${qty} are deatures that allow us to access the value of var name and qty everytime in loop . They can also be used in some other cases earlier where we used + + to get the values in loop of variables.
+                    mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                                ${name}
+                                <span class="badge text-bg-dark">${qty}</span>
+                            </li>`
+                    $('#citems').append(mystr);
+                }
+                document.getElementById('cart').innerHTML = sum;
+            });
+
+        // event.preventDefault() helps us to prevent the default actions of some options like to reload a page when submit ype button is clicked or not to open a link when a link is clicked. Here it is used to prevent the page from reloading when we touch the submit button.
+        event.preventDefault();
+    });
+</script>
+{% endblock %}

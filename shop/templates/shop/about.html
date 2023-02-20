@@ -1,0 +1,116 @@
+{% extends 'shop/basic.html' %}
+{% block title %} About Us{% endblock %}
+{% block aboutactive %}active{% endblock aboutactive %}
+{% block nothomecart %}see{% endblock nothomecart %}
+{% block css %}
+<style>
+  
+  body
+  {
+    box-sizing : border-box;
+  }
+  .see
+  {
+      visibility : hidden ;
+  }
+  #caption
+  {
+    font-size: 1rem;
+    font-style: italic;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  #logo-container
+  {
+    position: relative;
+  }
+  #logo
+  {
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top:0;
+    right:0;
+    border: 2px solid black;
+    border-radius: 50%;
+  }
+  .background-colour-about
+  {
+    position: relative;
+    background-color: #FF8B13;
+    height:250px;
+    font-style: italic;
+    display: flex;
+    justify-content: center;
+  }
+  .about-img
+  {
+    height: 100%;
+    border-radius:50%;
+    border: 2px solid blue;
+
+  }
+</style>
+{% endblock css %}
+{% block body %}
+    <div class="container-fluid d-flex bg-light" id="logo-container">
+
+      <h1 class="display-3" style="font-style: italic;">AniCart <span id="caption">Serving since 2000</span></h1>
+      <a href="/shop/"><img src="../../static/shop/Logo.png" alt="Logo" id="logo"></a>
+    </div>
+<div class="background-colour-about">
+  <h2 class="about-heading" style="text-align: center;">Our Story</h2>
+  
+</div>
+<div style="height:163px; display: flex; justify-content: center;" >
+  <img src="../../static/shop/Logo.png"  alt="Img" class="about-img"> 
+</div>
+<div class="container-fluid p-3" style="background-color : #379237; color : white">
+  Anicart.com, Inc. is an Indian multinational technology company which focuses on e-commerce, cloud computing, and digital streaming. It has been referred to as "one of the most influential economic and cultural forces in the world", and is one of the world's most valuable brands.
+
+ Initially an online marketplace for books, it has expanded into a multitude of product categories: a strategy that has earned it the moniker The Everything Store.[4] It has multiple subsidiaries including AniCart Web Services (cloud computing), Zoox (autonomous vehicles), Kuiper Systems (satellite Internet), AniCart Lab126 (computer hardware R&D). Its other subsidiaries include Ring, Twitch, IMDb, MGM Holdings and Whole Foods Market.
+
+Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem, saepe quis. Officia et, ab amet sapiente non, veritatis mollitia odit totam quasi, nobis voluptate. Id a aperiam nobis expedita adipisci quam et quo molestiae unde.
+</div>
+<main role="main">
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron bg-light border-bottom my-3">
+    <div class="container d-flex" id="logo-container">
+  </div>
+  <div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+      <div class="col-md-4">
+        <h2>Contact Page</h2>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        <p><a class="btn btn-secondary" href="/shop/contact/" role="button">Contact Us &raquo;</a></p>
+      </div>
+      <div class="col-md-4">
+        <h2>Main Shop</h2>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        <p><a class="btn btn-secondary" href="/shop/" role="button">Visit Shop &raquo;</a></p>
+      </div>
+      
+      <div class="col-md-4">
+        <h2>Track Orders</h2>
+        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+        {% if user.is_authenticated %}
+        <p><a class="btn btn-secondary" href="/shop/tracker" role="button">View details &raquo;</a></p>
+        {% else %}
+        <button type="button" class="btn btn-dark mx-2 display-button" data-bs-toggle="modal"
+              data-bs-target="#signup"><span id="Display-Signup">Signup</span>
+        </button>
+        <button type="button" class="btn btn-dark mx-2" data-bs-toggle="modal" data-bs-target="#login">
+          Login
+        </button>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}
+{% block js %}
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+</html>
+
+{% endblock %}

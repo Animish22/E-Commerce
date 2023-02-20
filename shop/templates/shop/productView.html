@@ -1,0 +1,205 @@
+{% extends 'shop/basic.html' %}
+{% block title %} {{product.product_name}} -- My Awesome Cart{% endblock %}
+{% block nothomecart %}see{% endblock nothomecart %}
+{% block css %}
+<style>
+    .col-md-3 {
+        display: inline-block;
+        margin-left: -4px;
+    }
+    .see
+    {
+        visibility : hidden ;
+    }
+  .img-container {
+    width: 36%;
+    margin: 10px 4px;
+    display:flex;
+    flex-direction:column;
+    align-items:center
+  }
+  .carousel-item
+  {
+    visibility:hidden;
+  }
+  .active
+  {
+    visibility:visible;
+  }
+    .col-md-3 {
+        width: 100%;
+        height: auto;
+    }
+
+
+
+    body .no-padding {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .carousel-control-prev-icon {
+        background: black no-repeat center center;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3e%3c/svg%3e");
+    }
+
+    .carousel-control-next-icon {
+        background: black no-repeat center center;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3e%3c/svg%3e");
+
+    }
+
+    body .carousel-indicators {
+        bottom: 0;
+    }
+
+    .carousel-indicators .active {
+        background-color: blue;
+    }
+    #Related_prod_control
+    {
+        height:150px;
+    }
+    .carousel-inner
+    {
+        height:80%;
+    }
+    @media screen and (max-width:500px){
+        #Details
+        {
+            font-size: 0.6rem;
+        }        
+            .card-title
+            {
+                font-size: 0.6rem;
+            }
+        #related_name
+        {
+            font-size:0.6rem;
+        }
+        img
+        {
+            height:70%;
+        }
+    }
+</style>
+{% endblock css %}
+{% block body %}
+{% load humanize %}
+<div class="container my-4 rounded-3">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row">
+                <img src="/media/{{product.images}}" width="253px" height="385px">
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h2>{{product.product_name}}</h2>
+            <h7> Description : {{product.desc}}</h7>
+            <h6> Price : {{product.price}}</h6>
+
+            <p>Inclusive of all taxes
+                EMI starts at {{product.emi_price}} No Cost EMI available</p>
+            <a href="#">EMI options available</a><br><br>
+            <span class="divpr">
+                <button class="btn btn-primary cart my-2">Add To Cart</button>
+            </span>
+        </div>
+    </div>
+</div>
+<hr>
+<h2 style="display:block ; text-align:center">Similar Products</h2>
+<div id="Related_prod_control" class="carousel slide " data-bs-ride="carousel">
+    <div class="carousel-inner" style="height:104%">
+        <!-- Images here get center because whenever we use text-align center all text and inline objects get aligned center -->
+      <div class="carousel-item active" style="display:flex;height:80%">
+        {% for i in related_prod %}
+        <div class="img-container" style="width: 100% ;height:100%;">
+        <img src="/media/{{i.images}}" height="100%" class="mx-2">
+        <span id="related_name">{{i.product_name|slice:"0:10"}}..</span>
+        </div>
+        {% comment %} <h5 class="card-title title-card"  id="namepr{{i.id}}">{{i.product_name|slice:"0:10"}}..</h5> {% endcomment %}
+        {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
+        </div>
+        <div class="carousel-item" style="display:flex;height:80%">
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#Related_prod_control" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#Related_prod_control" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<div class="container border-bottom p-2" id="Details">
+    <h1 class="my-4">Product Details</h1>
+    <div class="container ms-3">
+        <div class="row">
+            <div class="col-2 border border bg-light rounded-2">Product Name</div>
+            <div class="col-4 border border rounded-2">{{product.product_name}}</div>
+        </div>
+        <div class="row">
+            <div class="col-2 border border bg-light rounded-2">Product Category</div>
+            <div class="col-4 border border rounded-2">{{product.category_name}}</div>
+        </div>
+        <div class="row ">
+            <div class="col-2 border border bg-light rounded-2">Product Sub Category</div>
+            <div class="col-4 border border rounded-2">{{product.sub_category_name}}</div>
+        </div>
+        <div class="row">
+            <div class="col-2 border border bg-light rounded-2">Price</div>
+            <div class="col-4 border border rounded-2">{{product.price}}</div>
+        </div>
+        <div class="row">
+            <div class="col-2 border border bg-light rounded-2">Desc</div>
+            <div class="col-4 border border rounded-2">{{product.desc}}</div>
+        </div>
+        <div class="row ">
+            <div class="col-2 border border bg-light rounded-2">Emi Price</div>
+            <div class="col-4 border border rounded-2">{{product.emi_price}}</div>
+        </div>
+        <div class="row ">
+            <div class="col-2 border border bg-light rounded-2">Publish Date</div>
+            <div class="col-4 border border rounded-2">{{product.pub_date}}</div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Reviews</h2>
+    {% if user.is_authenticated %}
+    <form method="post" action="/shop/postreview/"> {% csrf_token %}
+        <div class="mb-3">
+            <label for="comment" class="form-label">Add your Review:</label>
+            <textarea class="form-control" id="comment" name="comment" rows="6" cols="15"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="productSno" class="form-label"></label>
+            <input type="hidden" name="productSno" id="productSno" value="{{product.id}}">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    {% else %}
+    <h2>Please Login to Add Your Reviews</h2>
+    {% endif %}
+    {% for review in reviews %}
+    <div class="row my-4 ">
+        <div class="col-md-1 "><img class="rounded mx-auto d-block w-75 my-2 border border-dark p-2"
+                src="../../static/shop/test.jpg"></div>
+        <div class="col-md-11 ">
+            <b>{{review.user.username}}</b> <span class="bg-secondary"
+                style="font-size:10px; padding:2px ;border:1px solid black ;border-radius:5px;color:white"> at
+                {{review.timestamp | naturaltime}} </span>
+            <div> {{review.comment}}</div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endblock %}
+    {% block js%}
+    <script>
+    </script>
+    {% endblock %}
