@@ -147,7 +147,6 @@
                                     <h5 class="card-title title-card"  id="namepr{{i.id}}">{{i.product_name|slice:"0:10"}}..</h5>
                                     <h7 class="card-title price-card" id="price" style="display:block;">Price : <span
                                             id="pricepr{{i.id}}">{{i.price}}</span></h7>
-                                    {% comment %} <p class="card-text text-card">{{i.desc|slice:"0:10"}}...</p> {% endcomment %}
                                     <span id="divpr{{i.id}}" class="divpr">
                                         <button id="pr{{i.id}}" class="btn btn-primary cart my-2">Add</button>
                                     </span>
@@ -195,21 +194,6 @@
             // document.getElementById('cart').innerHTML = Object.keys(cart).length;
             updateCart(cart);
         }
-
-        // If the add to cart button is clicked, add/increment the item
-        // $('.cart').click(function() {
-        //     $('.divpr').on('click','button.cart' ,function(){
-        //     var idstr = this.id.toString();
-        //     if (cart[idstr] != undefined) {
-        //         cart[idstr] = cart[idstr] + 1;
-        //     } else {
-        //         cart[idstr] = 1;
-        //     }
-        //     updateCart(cart);
-
-        // });
-
-
         //Used to fill items in cart so that we can access them using the above parse function  .Also the items are added such that they are a valid json string.
         $('.divpr').on('click', 'button.cart', function () {
             // this.id.toString() Used to get string of id of the class cart on which we have clicked

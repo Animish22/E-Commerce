@@ -147,6 +147,8 @@
                         let time = updates[i]['time'];
                         var a = new Date(time);
                         var curr = new Date();
+                        console.log(a);
+                        console.log(curr)
                         mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
                     ${text}
                     <span class="badge text-bg-dark">${time}</span>
@@ -204,7 +206,6 @@
                             </li>`
                     $('#citems').append(mystr);
                 }
-                document.getElementById('cart').innerHTML = sum;
             });
 
         // event.preventDefault() helps us to prevent the default actions of some options like to reload a page when submit ype button is clicked or not to open a link when a link is clicked. Here it is used to prevent the page from reloading when we touch the submit button.
