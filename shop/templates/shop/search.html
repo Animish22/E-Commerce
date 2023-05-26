@@ -2,6 +2,12 @@
 {%block title%}Search{% endblock %}
 {% block css %}
 <style>
+    *
+    {
+        margin : 0 ;
+        padding : 0 ;
+        box-sizing : border-box ;
+    }
     .col-md-3 {
         display: inline-block;
         margin-left: -4px;
@@ -18,6 +24,10 @@
     {
         height:80px;
         width:65%;
+    }
+    body
+    {
+        height : 100vh;
     }
     body .carousel-indicator li {
         background-color: blue;
@@ -67,7 +77,6 @@
     }
 
     #Product-Area{
-        min-height:100vh;
         background-image: linear-gradient(rgb(230, 218, 218), rgb(105, 100, 100));
     }
     .product-row
@@ -118,7 +127,7 @@
 {% block body %}
 {% load static %}
 <div class="container-fluid" id="Product-Area">
-    <div class="container d-flex flex-column justify-content-center align-items-center" >
+    <div class="container d-flex flex-column justify-content-center align-items-center" style="min-height : 72.5vh;">
         <!--Slideshow starts here -->
         {% for product, range, nSlides in allProds %}
         <!-- we use product.0.category_name because each product category will have atleast one item and for that item we can get category_name .We cannot use 1,2, etc because not guaranteed that each category will have more than 1 items . product.0.category_name means the value of category_name for the first product in the ith iterations of allprods i.e. product.0.category_name is unique . -->
