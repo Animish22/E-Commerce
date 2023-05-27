@@ -4,6 +4,12 @@
 {% block nothomecart %}see{% endblock nothomecart %}
 {% block css %}
 <style>
+  *
+  {
+    margin : 0 ;
+    padding : 0 ;
+    box-sizing : border-box ; 
+  }
   body {
     background-size: 1488px 676px;
     background-color: rgb(245, 223, 193);
@@ -17,15 +23,12 @@
     height: 80%;
     width: 80%;
   }
-  .main
-  {
-    width:100vw;
-  }
   .img-container
   {
     width:50%;
     height:50%;
   }
+
   @media screen and (max-width:576px) {
     #Both
     {

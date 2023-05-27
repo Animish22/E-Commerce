@@ -17,8 +17,19 @@
   <title>Display Items</title>
 </head>
 <style>
+  *
+  {
+    margin : 0;
+    padding : 0;
+    box-sizing : border-box;
+  }
   body {
     background-image: linear-gradient(#CBF1F5, rgb(226, 216, 216));
+    min-height:100vh;
+  }
+  a
+  {
+    height  : 100%;
   }
   nav
   {
@@ -50,7 +61,7 @@
 
   .four-in-one {
     width: 100%;
-    height: 80%;
+    height: 100%;
   }
 
   .img-container {
@@ -66,7 +77,6 @@
   .box-2 {
     border-radius: 5px;
     width: 25vw;
-    {% comment %} height: max-content; {% endcomment %}
     margin: 2px 12px;
     padding: 2px;
   }
@@ -100,7 +110,6 @@
   .box-3 {
     border-radius: 5px;
     background-color: white;
-    {% comment %} max-height: 170px; {% endcomment %}
     width: 100%;
     margin: 2px 12px;
     padding: 2px;
@@ -120,7 +129,6 @@
   }
 
   .one-cover {
-    {% comment %} height: 80%; {% endcomment %}
     width: auto;
   }
 
@@ -261,21 +269,21 @@
         <div class="d-flex flex-column align-items-center justify-content-center">
           <div class="d-flex item-container justify-content-center">
             <div class="d-flex flex-column img-container ">
-               <img src="../../static/shop/Whirlpool_Affordable_Refrigerator.png" alt="Ok" class="four-in-one">
-              <div class="card-item-name ">Whirlpoool</div>
+               <a href="/shop"><img src="../../static/shop/Whirlpool_Affordable_Refrigerator.png" alt="Ok" class="four-in-one"></a>
+              <div class="card-item-name ">Whirlpool</div>
             </div>
             <div class="d-flex flex-column img-container ">
-              <img src="../../static/shop/Whirlpool_Refrigerator.jpg" alt="Ok" class="four-in-one">
+              <a href="/shop"><img src="../../static/shop/Whirlpool_Refrigerator.jpg" alt="Ok" class="four-in-one"></a>
               <div class="card-item-name">Hitachi</div>
             </div>
           </div>
           <div class="d-flex item-container justify-content-center">
             <div class="d-flex flex-column img-container ">
-               <img src="../../static/shop/Xiaomi.png" alt="Ok" class="four-in-one">
+              <a href="/shop"><img src="../../static/shop/Xiaomi.png" alt="Ok" class="four-in-one"></a>
               <div class="card-item-name ">Redmi</div>
             </div>
             <div class="d-flex flex-column img-container ">
-              <img src="../../static/shop/mouse.jpg" alt="Ok" class="four-in-one">
+              <a href="/shop"><img src="../../static/shop/mouse.jpg" alt="Ok" class="four-in-one"></a>
               <div class="card-item-name">Mouse</div>
             </div>
           </div>
@@ -290,11 +298,10 @@
           {% if user.is_authenticated %}
           <span class="Signup-text">Thanks for logging in  </span>
           {% else %}
-          <span class="Signup-text">For best Experience </span>
+          <span class="Signup-text">Visit Our Main Store</span>
           <div style="margin: auto;">
             <button type="button" class="btn btn-success mx-2 display-button" >
               <span class="Display-Signup"><a href="/shop" style="text-decoration: none; color: white;">Shop</a></span>
-            </button>
             </button>
           </div>
           {% endif %}
@@ -305,21 +312,21 @@
         <div class="d-flex flex-column align-items-center justify-content-center">
           <div class="d-flex item-container justify-content-center">
             <div class="d-flex flex-column img-container ">
-              <img src="../../static/shop/beauty_products.jpg" alt="Ok" class="four-in-one">
+              <a href="/shop"><img src="../../static/shop/beauty_products.jpg" alt="Ok" class="four-in-one"></a>
               <div class="card-item-name ">Lipsticks</div>
             </div>
             <div class="d-flex flex-column img-container ">
-              <img src="../../static/shop/beauty_2.jpg" alt="Ok" class="four-in-one">
+              <a href="/shop"><img src="../../static/shop/beauty_2.jpg" alt="Ok" class="four-in-one"></a>
               <div class="card-item-name">Conditioner</div>
             </div>
           </div>
           <div class="d-flex item-container justify-content-center">
             <div class="d-flex flex-column img-container ">
-              <img src="../../static/shop/beauty_products.jpg" alt="Ok" class="four-in-one">
+              <a href="/shop"><img src="../../static/shop/beauty_products.jpg" alt="Ok" class="four-in-one"></a>
               <div class="card-item-name ">Foundation</div>
             </div>
             <div class="d-flex flex-column img-container ">
-              <img src="../../static/shop/beauty_2.jpg" alt="Ok" class="four-in-one">
+              <a href="/shop"><img src="../../static/shop/beauty_2.jpg" alt="Ok" class="four-in-one"></a>
               <div class="card-item-name">Concealer</div>
             </div>
           </div>
@@ -346,21 +353,21 @@
         <div class="d-flex flex-column align-items-center justify-content-center" style="height: 94%;">
           <div class="d-flex item-container justify-content-center">
             <div class="d-flex flex-column img-container ">
-              <img src="../../static/shop/jordan2.jpg" alt="Ok" class="four-in-one">
+              <a href="/shop"><img src="../../static/shop/jordan2.jpg" alt="Ok" class="four-in-one"></a>
               <div class="card-item-name ">Reebok</div>
             </div>
             <div class="d-flex flex-column img-container ">
-              <img src="../../static/shop/jordan.jpg" alt="Ok" class="four-in-one">
+              <a href="/shop"><img src="../../static/shop/jordan.jpg" alt="Ok" class="four-in-one"></a>
               <div class="card-item-name">Nike</div>
             </div>
           </div>
           <div class="d-flex item-container justify-content-center">
             <div class="d-flex flex-column img-container ">
-              <img src="../../static/shop/Sketcher_Shoes.png" alt="Ok" class="four-in-one">
+              <a href="/shop"><img src="../../static/shop/Sketcher_Shoes.png" alt="Ok" class="four-in-one"></a>
               <div class="card-item-name ">Sketchers</div>
             </div>
             <div class="d-flex flex-column img-container ">
-              <img src="../../static/shop/Campus_Shoes.jpg" alt="Ok" class="four-in-one">
+              <a href="/shop"><img src="../../static/shop/Campus_Shoes.jpg" alt="Ok" class="four-in-one"></a>
               <div class="card-item-name">Puma</div>
             </div>
           </div>
@@ -372,21 +379,21 @@
         <div class="d-flex flex-column align-items-center justify-content-center" style="height: 94%;">
           <div class="d-flex item-container justify-content-center">
             <div class="d-flex flex-column img-container ">
-              <img src="../../static/shop/watch_1.jpg" alt="Ok" class="four-in-one">
+              <a href="/shop"><img src="../../static/shop/watch_1.jpg" alt="Ok" class="four-in-one"></a>
               <div class="card-item-name ">G-Shock</div>
             </div>
             <div class="d-flex flex-column img-container ">
-              <img src="../../static/shop/watch_2.jpg" alt="Ok" class="four-in-one">
+              <a href="/shop"><img src="../../static/shop/watch_2.jpg" alt="Ok" class="four-in-one"></a>
               <div class="card-item-name">Casio</div>
             </div>
           </div>
           <div class="d-flex item-container justify-content-center">
             <div class="d-flex flex-column img-container ">
-              <img src="../../static/shop/watch_2.jpg" alt="Ok" class="four-in-one">
+              <a href="/shop"><img src="../../static/shop/watch_2.jpg" alt="Ok" class="four-in-one"></a>
               <div class="card-item-name ">Rolex</div>
             </div>
             <div class="d-flex flex-column img-container ">
-              <img src="../../static/shop/watch_1.jpg" alt="Ok" class="four-in-one">
+              <a href="/shop"><img src="../../static/shop/watch_1.jpg" alt="Ok" class="four-in-one"></a>
               <div class="card-item-name">Tomato</div>
             </div>
           </div>

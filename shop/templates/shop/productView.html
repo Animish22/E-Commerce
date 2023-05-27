@@ -101,24 +101,20 @@
             <p>Inclusive of all taxes
                 EMI starts at {{product.emi_price}} No Cost EMI available</p>
             <a href="#">EMI options available</a><br><br>
-            <span class="divpr">
-                <button class="btn btn-primary cart my-2">Add To Cart</button>
-            </span>
         </div>
     </div>
 </div>
 <hr>
 <h2 style="display:block ; text-align:center">Similar Products</h2>
-<div id="Related_prod_control" class="carousel slide " data-bs-ride="carousel">
-    <div class="carousel-inner" style="height:104%">
+<div id="Related_prod_control" class="carousel slide " data-bs-ride="carousel" style="width:100vw;">
+    <div class="carousel-inner" style="height:100%; widt:90%;">
         <!-- Images here get center because whenever we use text-align center all text and inline objects get aligned center -->
-      <div class="carousel-item active" style="display:flex;height:80%">
+      <div class="carousel-item active" style="display:flex;height:80%;width:100%;">
         {% for i in related_prod %}
-        <div class="img-container" style="width: 100% ;height:100%;">
+        <div class="img-container" style="width: 25% ;height:100%;">
         <img src="/media/{{i.images}}" height="100%" class="mx-2">
         <span id="related_name">{{i.product_name|slice:"0:10"}}..</span>
         </div>
-        {% comment %} <h5 class="card-title title-card"  id="namepr{{i.id}}">{{i.product_name|slice:"0:10"}}..</h5> {% endcomment %}
         {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
         </div>
         <div class="carousel-item" style="display:flex;height:80%">
@@ -190,7 +186,7 @@
     <div class="row my-4 ">
         <div class="col-md-1 "><img class="rounded mx-auto d-block w-75 my-2 border border-dark p-2"
                 src="../../static/shop/test.jpg"></div>
-        <div class="col-md-11 ">
+        <div class="col-md-11">
             <b>{{review.user.username}}</b> <span class="bg-secondary"
                 style="font-size:10px; padding:2px ;border:1px solid black ;border-radius:5px;color:white"> at
                 {{review.timestamp | naturaltime}} </span>
