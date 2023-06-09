@@ -7,9 +7,15 @@ AniCart is a fully responsive E-Commerce Website . Below are some ScreenShots of
 # Products Page
 ![HomePage_Mobile](https://github.com/Animish22/E-Commerce/assets/125894114/c7a0b426-79ac-4430-af2b-fd15a82a1789)
 
+# Each Item Page
+![EachItemPage1_Mobile](https://github.com/Animish22/E-Commerce/assets/125894114/4fe234dc-eb34-4455-a7ed-4f76926f15a7)
+![EachItemPage2_Mobile](https://github.com/Animish22/E-Commerce/assets/125894114/4fa39fcc-b844-4ddf-b086-23010a502608)
+
+# Comments Under Each Item Page
+![Comments_EachItem](https://github.com/Animish22/E-Commerce/assets/125894114/c75ebbdc-5301-4d1c-90fd-c0f6bd5abb12)
+
 # CheckOut Page
-![CheckoutPage1_Mobile](https://github.com/Animish22/E-Commerce/assets/125894114/a6888a79-accd-458f-b36c-19b10288d646)
-![CheckoutPage2_Mobile](https://github.com/Animish22/E-Commerce/assets/125894114/9d5c7565-0223-4130-8176-e04a595f7e25)
+![CheckoutPage](https://github.com/Animish22/E-Commerce/assets/125894114/d3cc61f9-dc7b-4270-a88b-c72a6e84e28c)
 
 # Contact Page 
 ![ContactPage_Mobile](https://github.com/Animish22/E-Commerce/assets/125894114/1e1aa459-5859-456f-9b2e-ac956aa78677)
